@@ -1,6 +1,6 @@
 import authService from "../appwrite/auth"
 import { Link, useNavigate } from "react-router-dom"
-import { useState } from 'react'
+import React, { useState } from 'react'
 import Button from "./Button"
 import Input from './Input'
 import Logo from "./Logo"
@@ -18,12 +18,11 @@ export default function Signup() {
           setError("")
           try {
                console.log(data);
-               const userData = await authService.createAccount(data);
-
+               const userData = await authService.createAccount(data)
                if (userData) {
-                    const userData = await authService.getCurrentUser();
-                    if (userData) dispatch(login({ userData }));
-                    navigate("/");
+                    const userData = await authService.getCurrentUser()
+                    if (userData) dispatch(login({ userData }))
+                    navigate("/")
                }
           } catch (error) {
                setError(error.message)
